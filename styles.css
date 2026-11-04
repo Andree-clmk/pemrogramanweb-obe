@@ -1,0 +1,53 @@
+:root {
+    --space-1: .5rem;
+    --space-2: 1rem;
+    --brand: #4f46e5;
+    --surface: #ffffff;
+    --text: #1f2937;
+    --radius: .75rem;
+}
+
+* { 
+    box-sizing: border-box; 
+}
+
+body {
+    margin: 0;
+    font-family: system-ui, sans-serif;
+    line-height: 1.6;
+    color: var(--text);
+}
+
+.container { 
+    width: min(100% - 2rem, 72rem); 
+    margin-inline: auto; 
+}
+
+/* Layout Navigasi dengan Flexbox */
+nav { 
+    display: flex; 
+    flex-wrap: wrap; 
+    gap: var(--space-2); 
+}
+
+/* Layout Kartu dengan CSS Grid */
+.cards {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(16rem, 1fr));
+    gap: var(--space-2);
+}
+
+.card { 
+    padding: 1rem; 
+    border: 1px solid #ddd; 
+    border-radius: var(--radius); 
+}
+
+/* Media Query Berbasis Kebutuhan Konten */
+@media (min-width: 48rem) {
+    .hero { 
+        display: grid; 
+        grid-template-columns: 1.3fr 1fr; 
+        gap: 2rem; 
+    }
+}
