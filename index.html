@@ -3,11 +3,55 @@
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>Praktikum Pemrograman Web</title>
+    <meta name="description" content="Proyek Individu Semester - Web Portal">
+    <title>Proyek Individu - Beranda</title>
+    <link rel="stylesheet" href="styles.css">
 </head>
 <body>
-    <h1>Praktikum Pemrograman Web</h1>
-    <p>Repository awal OBE.</p>
+    <header>
+        <h1>Portal Proyek Individu</h1>
+        <nav aria-label="Navigasi Utama">
+            <ul>
+                <li><a href="#beranda">Beranda</a></li>
+                <li><a href="#tentang">Tentang</a></li>
+                <li><a href="#kontak">Kontak</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <main>
+        <!-- Section 1: Beranda -->
+        <section id="beranda">
+            <h2>Selamat Datang di Beranda</h2>
+            <p>Halaman utama dari sistem proyek individu mahasiswa.</p>
+        </section>
+
+        <!-- Section 2: Tentang (Memuat Article) -->
+        <section id="tentang">
+            <h2>Tentang Sistem</h2>
+            <article>
+                <h3>Informasi Modul</h3>
+                <p>Modul ini dirancang untuk memenuhi standar struktur HTML semantik dan aksesibilitas web.</p>
+            </article>
+        </section>
+
+        <!-- Section 3: Kontak (Memuat Form) -->
+        <section id="kontak">
+            <h2>Formulir Kontak</h2>
+            <form>
+                <label for="nama">Nama Lengkap:</label>
+                <input type="text" id="nama" name="nama" required>
+
+                <label for="pesan">Pesan:</label>
+                <textarea id="pesan" name="pesan" required></textarea>
+
+                <button type="submit">Kirim Pesan</button>
+            </form>
+        </section>
+    </main>
+
+    <footer>
+        <p>&copy; 2026 Proyek Individu Mahasiswa</p>
+    </footer>
 </body>
 </html>
-```
