@@ -28,7 +28,7 @@
             <img src="images/banner-dekorasi.png" alt="">
         </section>
 
-        <!-- Section 2: Tentang (Memuat Article) -->
+        <!-- Section 2: Tentang & Daftar Inventaris Dinamis -->
         <section id="tentang">
             <h2>Tentang Sistem</h2>
             <article>
@@ -36,6 +36,22 @@
                 <img src="images/alat-ukur.jpg" alt="Perangkat mikrokontroler dan alat ukur digital di meja laboratorium">
                 <p>Mencatat data alat dan status kondisi secara berkala.</p>
             </article>
+
+            <!-- Bagian Tombol Filter & Tema Sesuai Modul Praktikum -->
+            <div class="control-section" style="margin-top: 2rem;">
+                <h3>Filter Inventaris Alat</h3>
+                <div class="filter-container" style="display: flex; gap: 0.5rem; flex-wrap: wrap; margin-top: 1rem;">
+                    <button data-filter="Semua" class="btn">Semua</button>
+                    <button data-filter="Baik" class="btn">Baik</button>
+                    <button data-filter="Perlu Cek" class="btn">Perlu Cek</button>
+                    <button id="theme-button" type="button" class="btn">Ganti Tema</button>
+                </div>
+            </div>
+
+            <!-- WADAH UTAMA TEMPAT ITEM INVENTARIS DIRENDER SECARA DINAMIS -->
+            <section id="daftar-alat" style="margin-top: 1.5rem;">
+                <!-- Item inventaris akan dimuat secara otomatis oleh JavaScript -->
+            </section>
         </section>
 
         <!-- Section 3: Kontak (Memuat Form) -->

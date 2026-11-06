@@ -12,7 +12,68 @@ const inventaris = [
     { id: 3, nama: 'Kabel UTP', kategori: 'Jaringan', jumlah: 20, kondisi: 'Perlu Cek' }
 ];
 
-// Menggunakan fungsi ringkasInventaris dari modul
+// ==========================================
+// SELEKTOR DOM & ELEMEN HTML
+// ==========================================
+const daftar = document.querySelector('#daftar-alat');
+const tombolFilter = document.querySelectorAll('[data-filter]');
+const themeButton = document.querySelector('#theme-button');
+
+// ==========================================
+// FUNGSI RENDER DOM AMAN (renderItems)
+// ==========================================
+function renderItems(items) {
+    if (!daftar) return;
+    daftar.replaceChildren(); // Membersihkan container sebelum merender ulang
+    for (const item of items) {
+        const article = document.createElement('article');
+        article.className = 'card';
+
+        const title = document.createElement('h3');
+        title.textContent = item.nama;
+
+        const info = document.createElement('p');
+        info.textContent = `${item.kategori} - ${item.jumlah} unit - Kondisi: ${item.kondisi}`;
+
+        article.append(title, info);
+        daftar.append(article);
+    }
+}
+
+// ==========================================
+// EVENT LISTENER FILTER INVENTARIS
+// ==========================================
+if (tombolFilter.length > 0) {
+    tombolFilter.forEach(button => {
+        button.addEventListener('click', () => {
+            const filter = button.dataset.filter;
+            const hasil = filter === 'Semua' 
+                ? inventaris 
+                : inventaris.filter(item => item.kondisi === filter);[cite: 5]
+            renderItems(hasil);
+        });
+    });
+}
+
+// ==========================================
+// WEB STORAGE: PREFERENSI TEMA (LOCALSTORAGE)
+// ==========================================
+const savedTheme = localStorage.getItem('theme') ?? 'light';[cite: 5]
+document.documentElement.dataset.theme = savedTheme;
+
+if (themeButton) {
+    themeButton.addEventListener('click', () => {
+        const currentTheme = document.documentElement.dataset.theme;
+        const nextTheme = currentTheme === 'dark' ? 'light' : 'dark';
+
+        document.documentElement.dataset.theme = nextTheme;
+        localStorage.setItem('theme', nextTheme);[cite: 5]
+    });
+}
+
+// ==========================================
+// PENGUJIAN LOGIKA, ARRAY METHODS & RENDER AWAL
+// ==========================================
 const ringkasan = ringkasInventaris(inventaris);
 console.log("=== RINGKASAN INVENTARIS ===", ringkasan);
 
@@ -27,3 +88,6 @@ console.log("=== DAFTAR NAMA ALAT ===", namaAlat);
 // Menggunakan reduce untuk menghitung total jumlah keseluruhan unit alat
 const totalUnit = inventaris.reduce((total, item) => total + item.jumlah, 0);
 console.log(`=== TOTAL KESELURUHAN UNIT: ${totalUnit} unit ===`);
+
+// Render awal saat halaman dimuat
+renderItems(inventaris);
