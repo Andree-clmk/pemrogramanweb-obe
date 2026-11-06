@@ -37,10 +37,27 @@
                 <p>Mencatat data alat dan status kondisi secara berkala.</p>
             </article>
 
-            <!-- Bagian Tombol Filter & Tema Sesuai Modul Praktikum -->
+            <!-- Bagian Kontrol (Pencarian, Limit Halaman, Filter, & Tema) -->
             <div class="control-section" style="margin-top: 2rem;">
-                <h3>Filter Inventaris Alat</h3>
-                <div class="filter-container" style="display: flex; gap: 0.5rem; flex-wrap: wrap; margin-top: 1rem;">
+                <h3>Pencarian & Filter Inventaris Alat</h3>
+                
+                <!-- Kotak Pencarian Berdasarkan Nama (Latihan 1) -->
+                <div class="search-container" style="margin-top: 1rem; margin-bottom: 1rem;">
+                    <input type="text" id="cari-nama" placeholder="Cari nama alat..." class="form-control" style="width: 100%; padding: 0.5rem;">
+                </div>
+
+                <!-- Pilihan Jumlah Item per Halaman (Latihan 3) -->
+                <div class="limit-container" style="margin-top: 1rem; margin-bottom: 1rem; display: flex; align-items: center; gap: 0.5rem;">
+                    <label for="limit-select">Tampilkan per halaman:</label>
+                    <select id="limit-select" class="form-control" style="padding: 0.4rem;">
+                        <option value="5">5</option>
+                        <option value="10">10</option>
+                        <option value="20">20</option>
+                    </select>
+                </div>
+
+                <!-- Tombol Filter & Tema -->
+                <div class="filter-container" style="display: flex; gap: 0.5rem; flex-wrap: wrap;">
                     <button data-filter="Semua" class="btn">Semua</button>
                     <button data-filter="Baik" class="btn">Baik</button>
                     <button data-filter="Perlu Cek" class="btn">Perlu Cek</button>

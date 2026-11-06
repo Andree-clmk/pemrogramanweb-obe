@@ -18,9 +18,11 @@ const inventaris = [
 const daftar = document.querySelector('#daftar-alat');
 const tombolFilter = document.querySelectorAll('[data-filter]');
 const themeButton = document.querySelector('#theme-button');
+const inputCari = document.querySelector('#cari-nama');
+const limitSelect = document.querySelector('#limit-select'); // Selektor untuk limit per halaman
 
 // ==========================================
-// FUNGSI RENDER DOM AMAN (renderItems)
+// FUNGSI RENDER DOM AMAN (renderItems) + TOMBOL DETAIL
 // ==========================================
 function renderItems(items) {
     if (!daftar) return;
@@ -35,7 +37,13 @@ function renderItems(items) {
         const info = document.createElement('p');
         info.textContent = `${item.kategori} - ${item.jumlah} unit - Kondisi: ${item.kondisi}`;
 
-        article.append(title, info);
+        // Menambahkan Tombol "Detail" secara dinamis dengan atribut data-id (Latihan 2)
+        const detailBtn = document.createElement('button');
+        detailBtn.textContent = 'Detail';
+        detailBtn.className = 'btn-detail';
+        detailBtn.dataset.id = item.id;
+
+        article.append(title, info, detailBtn);
         daftar.append(article);
     }
 }
@@ -56,6 +64,35 @@ if (tombolFilter.length > 0) {
 }
 
 // ==========================================
+// EVENT LISTENER PENCARIAN BERDASARKAN NAMA (Latihan 1)
+// ==========================================
+if (inputCari) {
+    inputCari.addEventListener('input', (e) => {
+        const keyword = e.target.value.toLowerCase();
+        const hasilPencarian = inventaris.filter(item => 
+            item.nama.toLowerCase().includes(keyword)
+        );
+        renderItems(hasilPencarian);
+    });
+}
+
+// ==========================================
+// EVENT DELEGATION UNTUK TOMBOL DETAIL (Latihan 2)
+// ==========================================
+if (daftar) {
+    daftar.addEventListener('click', (e) => {
+        if (e.target.classList.contains('btn-detail')) {
+            const idAlat = e.target.dataset.id;
+            const alatDitemukan = inventaris.find(item => item.id == idAlat);
+            
+            if (alatDitemukan) {
+                alert(`Detail Alat:\nNama: ${alatDitemukan.nama}\nKategori: ${alatDitemukan.kategori}\nJumlah: ${alatDitemukan.jumlah}\nKondisi: ${alatDitemukan.kondisi}`);
+            }
+        }
+    });
+}
+
+// ==========================================
 // WEB STORAGE: PREFERENSI TEMA (LOCALSTORAGE)
 // ==========================================
 const savedTheme = localStorage.getItem('theme') ?? 'light';
@@ -72,20 +109,31 @@ if (themeButton) {
 }
 
 // ==========================================
+// WEB STORAGE: PILIHAN JUMLAH ITEM PER HALAMAN (Latihan 3)
+// ==========================================
+const savedLimit = localStorage.getItem('limitPerPage') ?? '5';
+if (limitSelect) {
+    limitSelect.value = savedLimit;
+
+    limitSelect.addEventListener('change', (e) => {
+        const selectedLimit = e.target.value;
+        localStorage.setItem('limitPerPage', selectedLimit);
+        console.log(`Jumlah item per halaman diatur ke: ${selectedLimit}`);
+    });
+}
+
+// ==========================================
 // PENGUJIAN LOGIKA, ARRAY METHODS & RENDER AWAL
 // ==========================================
 const ringkasan = ringkasInventaris(inventaris);
 console.log("=== RINGKASAN INVENTARIS ===", ringkasan);
 
-// Menggunakan filter untuk mengambil alat dengan kondisi "Baik"
 const alatBaik = inventaris.filter(item => item.kondisi === 'Baik');
 console.log("=== ALAT DENGAN KONDISI BAIK ===", alatBaik);
 
-// Menggunakan map untuk menghasilkan array yang hanya berisi nama alat
 const namaAlat = inventaris.map(({ nama }) => nama);
 console.log("=== DAFTAR NAMA ALAT ===", namaAlat);
 
-// Menggunakan reduce untuk menghitung total jumlah keseluruhan unit alat
 const totalUnit = inventaris.reduce((total, item) => total + item.jumlah, 0);
 console.log(`=== TOTAL KESELURUHAN UNIT: ${totalUnit} unit ===`);
 
