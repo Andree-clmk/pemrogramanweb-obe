@@ -2,9 +2,9 @@
 
 Berikut adalah hasil analisis minimal 5 request pada tab Network dari situs layanan publik/pendidikan yang diamati:
 
-| No | Nama Aset / URL | Method | Status | Content Type | Ukuran (Size) | Fungsi Request |
+| No | URL | Method | Status | Content Type | Ukuran (Size) | Fungsi Request |
 |----|-----------------|--------|--------|--------------|---------------|----------------|
-| 1  | `https://www.perpustakaan.co.id/m/home.dg` (home.dg) | GET | 200 OK | text/html | 17.4 kB | Sebagai halaman utama website. |
+| 1  | `https://www.perpustakaan.co.id/m/home.dg` | GET | 200 OK | text/html | 17.4 kB | Sebagai halaman utama website. |
 | 2  | `https://www.perpustakaan.co.id/m/css/bootstrap.min.css` | GET | 200 OK | text/css | 195 kB | Mengatur tampilan dan desain website. |
 | 3  | `https://www.perpustakaan.co.id/m/js/bootstrap.bundle.min.js` | GET | 200 OK | text/javascript | 80.7 kB | Menjalankan fitur interaktif pada website. |
 | 4  | `https://www.perpustakaan.co.id/m/js/waypoints.min.js` | GET | 200 OK | text/javascript | 8.4 B | Mendeteksi ketika pengguna menggulir halaman (scroll) hingga mencapai elemen tertentu. |
