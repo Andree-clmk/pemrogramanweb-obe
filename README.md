@@ -19,6 +19,13 @@ Proyek ini merupakan repositori awal dan latihan praktikum pemrogaman web berbas
 ## Deskripsi Singkat Halaman
 Halaman web ini adalah portal inventaris laboratorium Teknik Komputer yang dirancang menggunakan struktur HTML semantik modern (`header`, `nav`, `main`, `section`, `article`, `form`, dan `footer`) serta hierarki heading yang runut untuk mendukung aksesibilitas yang baik.
 
+# Proyek Individu Semester
+Repositori ini berisi kode sumber untuk pengembangan proyek individu berbasis web.
+## Fitur Utama
+- Struktur HTML semantik (`header`, `nav`, `main`, `section`, `article`, `form`, `footer`).
+- Hierarki *heading* yang logis (`h1` - `h3`).
+- Penerapan atribut aksesibilitas dasar.
+
 ## Fitur yang Sudah Selesai
 * Struktur dokumen HTML5 semantik (navigasi utama, section layanan, dan form kontak).
 * Hierarki heading yang terstruktur dengan baik (`<h1>`, `<h2>`, `<h3>`).

@@ -3,7 +3,7 @@
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <meta name="description" content="Portal inventaris laboratorium Teknik Komputer">
+    <meta name="description" content="Portal inventaris laboratorium dan proyek individu">
     <title>WebLab - Inventaris Laboratorium</title>
     <link rel="stylesheet" href="styles.css">
 </head>
@@ -11,34 +11,37 @@
 <body>
     <header>
         <a href="#main">Lewati ke konten utama</a>
-        <h1>WebLab</h1>
-        <nav aria-label="Navigasi utama">
-            <a href="#layanan">Layanan</a>
-            <a href="#kontak">Kontak</a>
+        <h1>WebLab - Inventaris Laboratorium</h1>
+        <nav aria-label="Navigasi Utama">
+            <ul>
+                <li><a href="#layanan">Layanan</a></li>
+                <li><a href="#tentang">Tentang</a></li>
+                <li><a href="#kontak">Kontak</a></li>
+            </ul>
         </nav>
     </header>
     
     <main id="main">
+        <!-- Section 1: Layanan -->
         <section id="layanan">
             <h2>Layanan Inventaris</h2>
-            
-            <!-- Contoh 1: Gambar dekoratif murni (menggunakan alt="") -->
             <img src="images/banner-dekorasi.png" alt="">
+        </section>
 
+        <!-- Section 2: Tentang (Memuat Article) -->
+        <section id="tentang">
+            <h2>Tentang Sistem</h2>
             <article>
                 <h3>Pencatatan Peralatan</h3>
-                
-                <!-- Contoh 2: Gambar konten/ilustrasi bermakna (menggunakan alt deskriptif) -->
                 <img src="images/alat-ukur.jpg" alt="Perangkat mikrokontroler dan alat ukur digital di meja laboratorium">
-                
-                <p>Mencatat data alat dan status kondisi.</p>
+                <p>Mencatat data alat dan status kondisi secara berkala.</p>
             </article>
         </section>
 
+        <!-- Section 3: Kontak (Memuat Form) -->
         <section id="kontak">
-            <h2>Kontak</h2>
+            <h2>Formulir Kontak</h2>
             <form>
-                <!-- Penambahan input Nama Lengkap dengan label yang terikat secara tepat -->
                 <label for="nama">Nama Lengkap</label>
                 <input id="nama" name="nama" type="text" required>
 
@@ -53,6 +56,8 @@
     <footer>
         <p>&copy; 2026 WebLab</p>
     </footer>
+    
+    <!-- Skrip JavaScript Modular -->
     <script type="module" src="js/app.js"></script>
 </body>
 </html>
