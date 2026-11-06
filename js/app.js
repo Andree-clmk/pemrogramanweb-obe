@@ -19,7 +19,11 @@ const daftar = document.querySelector('#daftar-alat');
 const tombolFilter = document.querySelectorAll('[data-filter]');
 const themeButton = document.querySelector('#theme-button');
 const inputCari = document.querySelector('#cari-nama');
-const limitSelect = document.querySelector('#limit-select'); // Selektor untuk limit per halaman
+const limitSelect = document.querySelector('#limit-select');
+
+// Selektor untuk Validasi Form (Langkah Praktikum)
+const form = document.querySelector('#form-alat');
+const status = document.querySelector('#form-status');
 
 // ==========================================
 // FUNGSI RENDER DOM AMAN (renderItems) + TOMBOL DETAIL
@@ -119,6 +123,49 @@ if (limitSelect) {
         const selectedLimit = e.target.value;
         localStorage.setItem('limitPerPage', selectedLimit);
         console.log(`Jumlah item per halaman diatur ke: ${selectedLimit}`);
+    });
+}
+
+// ==========================================
+// FUNGSI VALIDASI FORM & EVENT SUBMIT (Langkah Praktikum)
+// ==========================================
+function validateForm(data) {
+    const errors = {};
+    const nama = String(data.get('nama') ?? '').trim();
+    const jumlah = Number(data.get('jumlah'));
+    
+    if (nama.length < 3) {
+        errors.nama = 'Nama alat minimal 3 karakter.';
+    }
+    if (!Number.isInteger(jumlah) || jumlah < 0) {
+        errors.jumlah = 'Jumlah harus bilangan bulat 0 atau lebih.';
+    }
+    return errors;
+}
+
+if (form) {
+    form.addEventListener('submit', event => {
+        event.preventDefault(); // Mencegah form terkirim langsung ke server[cite: 3]
+        const data = new FormData(form);
+        const errors = validateForm(data);
+
+        // Membersihkan pesan error dan atribut aria-invalid sebelumnya[cite: 3]
+        document.querySelectorAll('.error').forEach(el => el.textContent = '');
+        document.querySelectorAll('[aria-invalid="true"]').forEach(el => el.removeAttribute('aria-invalid'));
+
+        if (Object.keys(errors).length) {
+            for (const [field, message] of Object.entries(errors)) {
+                const errorElement = document.querySelector(`#error-${field}`);
+                if (errorElement) errorElement.textContent = message;
+                form.elements[field]?.setAttribute('aria-invalid', 'true');[cite: 3]
+            }
+            const firstField = Object.keys(errors)[0];
+            form.elements[firstField]?.focus(); // Mengarahkan fokus ke field error pertama[cite: 3]
+            if (status) status.textContent = 'Periksa kembali data yang belum valid.';[cite: 3]
+            return;
+        }
+
+        if (status) status.textContent = 'Data valid dan siap dikirim.';[cite: 3]
     });
 }
 

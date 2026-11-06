@@ -71,17 +71,52 @@
             </section>
         </section>
 
-        <!-- Section 3: Kontak (Memuat Form) -->
-        <section id="kontak">
-            <h2>Formulir Kontak</h2>
-            <form>
-                <label for="nama">Nama Lengkap</label>
-                <input id="nama" name="nama" type="text" required>
+        <!-- Section 3: Form Pendataan Alat dengan Validasi (Langkah Praktikum) -->
+        <section id="kontak" style="margin-top: 2rem;">
+            <h2>Form Pendataan Alat</h2>
+            <p id="form-status" style="font-weight: bold;"></p>
+            
+            <form id="form-alat" novalidate>
+                <!-- Nama Alat (Tipe Teks) -->
+                <div style="margin-bottom: 1rem;">
+                    <label for="nama">Nama Alat</label>
+                    <input type="text" id="nama" name="nama" required class="form-control" style="width: 100%; padding: 0.4rem;">
+                    <span id="error-nama" class="error" style="color: red; font-size: 0.85rem;"></span>
+                </div>
 
-                <label for="email">Email</label>
-                <input id="email" name="email" type="email" required>
-                
-                <button type="submit">Kirim</button>
+                <!-- Kategori (Tipe Teks) -->
+                <div style="margin-bottom: 1rem;">
+                    <label for="kategori">Kategori</label>
+                    <input type="text" id="kategori" name="kategori" required class="form-control" style="width: 100%; padding: 0.4rem;">
+                    <span id="error-kategori" class="error" style="color: red; font-size: 0.85rem;"></span>
+                </div>
+
+                <!-- Jumlah (Tipe Number dengan min dan required) -->
+                <div style="margin-bottom: 1rem;">
+                    <label for="jumlah">Jumlah</label>
+                    <input type="number" id="jumlah" name="jumlah" min="0" required class="form-control" style="width: 100%; padding: 0.4rem;">
+                    <span id="error-jumlah" class="error" style="color: red; font-size: 0.85rem;"></span>
+                </div>
+
+                <!-- Kondisi (Opsi Pilihan) -->
+                <div style="margin-bottom: 1rem;">
+                    <label for="kondisi">Kondisi</label>
+                    <select id="kondisi" name="kondisi" required class="form-control" style="width: 100%; padding: 0.4rem;">
+                        <option value="">Pilih Kondisi</option>
+                        <option value="Baik">Baik</option>
+                        <option value="Perlu Cek">Perlu Cek</option>
+                    </select>
+                    <span id="error-kondisi" class="error" style="color: red; font-size: 0.85rem;"></span>
+                </div>
+
+                <!-- Tanggal Perolehan (Tipe Date dengan required) -->
+                <div style="margin-bottom: 1rem;">
+                    <label for="tanggal">Tanggal Perolehan</label>
+                    <input type="date" id="tanggal" name="tanggal" required class="form-control" style="width: 100%; padding: 0.4rem;">
+                    <span id="error-tanggal" class="error" style="color: red; font-size: 0.85rem;"></span>
+                </div>
+
+                <button type="submit" class="btn">Simpan Data</button>
             </form>
         </section>
     </main>
