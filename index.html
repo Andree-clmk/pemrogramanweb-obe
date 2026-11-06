@@ -84,10 +84,14 @@
                     <span id="error-nama" class="error" style="color: red; font-size: 0.85rem;"></span>
                 </div>
 
-                <!-- Kategori (Tipe Teks) -->
+                <!-- Kategori (Menggunakan Select sesuai instruksi) -->
                 <div style="margin-bottom: 1rem;">
                     <label for="kategori">Kategori</label>
-                    <input type="text" id="kategori" name="kategori" required class="form-control" style="width: 100%; padding: 0.4rem;">
+                    <select id="kategori" name="kategori" required class="form-control" style="width: 100%; padding: 0.4rem;">
+                        <option value="">Pilih Kategori</option>
+                        <option value="Jaringan">Jaringan</option>
+                        <option value="Elektronika">Elektronika</option>
+                    </select>
                     <span id="error-kategori" class="error" style="color: red; font-size: 0.85rem;"></span>
                 </div>
 
