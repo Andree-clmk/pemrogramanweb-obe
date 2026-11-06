@@ -49,7 +49,7 @@ if (tombolFilter.length > 0) {
             const filter = button.dataset.filter;
             const hasil = filter === 'Semua' 
                 ? inventaris 
-                : inventaris.filter(item => item.kondisi === filter);[cite: 5]
+                : inventaris.filter(item => item.kondisi === filter);
             renderItems(hasil);
         });
     });
@@ -58,7 +58,7 @@ if (tombolFilter.length > 0) {
 // ==========================================
 // WEB STORAGE: PREFERENSI TEMA (LOCALSTORAGE)
 // ==========================================
-const savedTheme = localStorage.getItem('theme') ?? 'light';[cite: 5]
+const savedTheme = localStorage.getItem('theme') ?? 'light';
 document.documentElement.dataset.theme = savedTheme;
 
 if (themeButton) {
@@ -67,7 +67,7 @@ if (themeButton) {
         const nextTheme = currentTheme === 'dark' ? 'light' : 'dark';
 
         document.documentElement.dataset.theme = nextTheme;
-        localStorage.setItem('theme', nextTheme);[cite: 5]
+        localStorage.setItem('theme', nextTheme);
     });
 }
 

@@ -5,6 +5,18 @@
     --surface: #ffffff;
     --text: #1f2937;
     --radius: .75rem;
+    --bg-color: #f8fafc;
+    --card-bg: #ffffff;
+    --border-color: #ddd;
+}
+
+/* Variabel saat mode dark aktif (dipicu oleh JavaScript) */
+[data-theme="dark"] {
+    --surface: #1e293b;
+    --text: #f1f5f9;
+    --bg-color: #0f172a;
+    --card-bg: #1e293b;
+    --border-color: #334155;
 }
 
 * { 
@@ -18,7 +30,8 @@ body {
     font-family: system-ui, sans-serif;
     line-height: 1.6;
     color: var(--text);
-    background-color: #f8fafc;
+    background-color: var(--bg-color);
+    transition: background-color 0.3s ease, color 0.3s ease;
 }
 
 .container { 
@@ -33,7 +46,8 @@ nav {
     gap: var(--space-2); 
     padding: var(--space-2);
     background-color: var(--surface);
-    border-bottom: 1px solid #ddd;
+    border-bottom: 1px solid var(--border-color);
+    transition: background-color 0.3s ease, border-color 0.3s ease;
 }
 
 /* Layout Kartu dengan CSS Grid */
@@ -46,10 +60,11 @@ nav {
 
 .card { 
     padding: 1rem; 
-    background-color: var(--surface);
-    border: 1px solid #ddd; 
+    background-color: var(--card-bg);
+    border: 1px solid var(--border-color); 
     border-radius: var(--radius); 
     box-shadow: 0 1px 3px rgba(0, 0, 0, 0.05);
+    transition: background-color 0.3s ease, border-color 0.3s ease;
 }
 
 /* Media Query Berbasis Kebutuhan Konten */
