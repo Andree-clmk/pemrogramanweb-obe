@@ -4,6 +4,30 @@ declare(strict_types=1);
 // Mengatur header agar respons berupa JSON dengan standar UTF-8
 header('Content-Type: application/json; charset=utf-8');
 
+// ==========================================
+// 0. IMPLEMENTASI MIDDLEWARE (Validasi Header)
+// ==========================================
+function validateJsonRequest(): void {
+    $method = $_SERVER['REQUEST_METHOD'];
+    
+    // Jika metode yang digunakan adalah POST, PUT, atau PATCH, wajib mengirim header Content-Type: application/json
+    if (in_array($method, ['POST', 'PUT', 'PATCH'], true)) {
+        $contentType = isset($_SERVER['CONTENT_TYPE']) ? trim($_SERVER['CONTENT_TYPE']) : '';
+        
+        if (strpos($contentType, 'application/json') === false) {
+            http_response_code(415); // Unsupported Media Type
+            echo json_encode([
+                'status' => 'error',
+                'message' => 'Content-Type harus application/json'
+            ], JSON_UNESCAPED_UNICODE);
+            exit;
+        }
+    }
+}
+
+// Jalankan middleware terlebih dahulu sebelum logika utama
+validateJsonRequest();
+
 $method = $_SERVER['REQUEST_METHOD'];
 
 // ==========================================
@@ -58,7 +82,6 @@ if ($method === 'POST') {
     $jumlah = filter_var($payload['jumlah'] ?? null, FILTER_VALIDATE_INT);
 
     // KONDISI 3: Aturan Bisnis Tidak Terpenuhi (Status 422)
-    // Menolak jika nama kosong, jumlah bukan angka, atau jumlah bernilai negatif (< 0)
     if ($nama === '' || $jumlah === false || $jumlah < 0) {
         http_response_code(422);
         echo json_encode([
