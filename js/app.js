@@ -12,6 +12,9 @@ let inventaris = JSON.parse(localStorage.getItem('dataInventaris')) || [
     { id: 3, nama: 'Kabel UTP', kategori: 'Jaringan', jumlah: 20, kondisi: 'Perlu Cek' }
 ];
 
+// Variabel Global untuk Menyimpan Data Mentah API (Latihan 2)
+let allUsers = [];
+
 // ==========================================
 // SELEKTOR DOM & ELEMEN HTML
 // ==========================================
@@ -24,6 +27,14 @@ const limitSelect = document.querySelector('#limit-select');
 // Selektor untuk Validasi Form
 const form = document.querySelector('#form-alat');
 const status = document.querySelector('#form-status');
+
+// Selektor untuk Fetch API (Modul Baru) & Tombol Retry
+const apiOutput = document.querySelector('#api-output');
+const apiMessage = document.querySelector('#api-message');
+const retryButton = document.querySelector('#btn-retry');
+
+// Selektor untuk Input Pencarian API (Latihan 2)
+const inputCariApi = document.querySelector('#cari-api-user');
 
 // ==========================================
 // FUNGSI RENDER DOM AMAN (renderItems) + TOMBOL DETAIL
@@ -229,6 +240,120 @@ if (form) {
         if (status) status.textContent = 'Data berhasil disimpan dan ditambahkan ke daftar!';
     });
 }
+
+// ==========================================
+// FUNGSI RENDER KHUSUS API (Latihan 2)
+// ==========================================
+function renderApiUsers(usersToRender) {
+    if (!apiOutput) return;
+    apiOutput.replaceChildren();
+
+    usersToRender.slice(0, 5).forEach(user => {
+        const li = document.createElement('li');
+        li.textContent = `${user.name} - ${user.email}`;
+        apiOutput.append(li);
+    });
+}
+
+// ==========================================
+// FETCH API: PENGAMBILAN DATA PENGGUNA (ASINKRON)
+// ==========================================
+async function loadUsers() {
+    if (!apiOutput || !apiMessage) return;
+
+    // 1. Loading State & Sembunyikan tombol retry
+    apiMessage.textContent = 'Memuat data...';
+    if (retryButton) retryButton.style.display = 'none';
+
+    // Konfigurasi fallback data lokal jika koneksi offline (ubah ke true jika diperlukan)
+    const USE_LOCAL_DATA = false;
+    const endpoint = USE_LOCAL_DATA 
+        ? './data/users.json' 
+        : 'https://jsonplaceholder.typicode.com/users';
+
+    try {
+        // 2. Melakukan GET request ke endpoint
+        const response = await fetch(endpoint);
+
+        // 3. Periksa response.ok
+        if (!response.ok) {
+            throw new Error(`HTTP Error: ${response.status}`);
+        }
+
+        // 4. Parse JSON & Simpan ke Variabel Global (Latihan 2)
+        allUsers = await response.json();
+        
+        // Render data menggunakan fungsi khusus
+        renderApiUsers(allUsers);
+
+        // Berhasil memuat data
+        apiMessage.textContent = `Berhasil memuat ${allUsers.length} data.`;
+        if (retryButton) retryButton.style.display = 'none';
+
+    } catch (error) {
+        // 5. Penanganan Error / Error Message & Tampilkan Tombol Retry
+        console.error(error);
+        apiMessage.textContent = 'Data belum dapat dimuat. Coba kembali.';
+        
+        if (retryButton) retryButton.style.display = 'inline-block';
+    }
+}
+
+// Event listener untuk tombol retry
+if (retryButton) {
+    retryButton.addEventListener('click', () => {
+        loadUsers();
+    });
+}
+
+// ==========================================
+// EVENT LISTENER PENCARIAN API LOKAL (Latihan 2)
+// ==========================================
+if (inputCariApi) {
+    inputCariApi.addEventListener('input', (e) => {
+        const keyword = e.target.value.toLowerCase();
+        const filteredUsers = allUsers.filter(user => 
+            user.name.toLowerCase().includes(keyword)
+        );
+        renderApiUsers(filteredUsers);
+    });
+}
+
+// ==========================================
+// FUNGSI CONTOH POST RESOURCE BARU KE API (Payload/Body JSON)
+// ==========================================
+async function tambahDataBaru() {
+    // 1. Contoh Payload / Body JSON
+    const dataBaru = {
+        name: "Budi Santoso",
+        username: "budi_s",
+        email: "budi.santoso@example.com",
+        kategori: "Elektronika"
+    };
+
+    try {
+        // 2. Melakukan fetch dengan metode POST dan header Content-Type
+        const response = await fetch('https://jsonplaceholder.typicode.com/users', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json; charset=UTF-8' // Menentukan tipe konten data berupa JSON
+            },
+            body: JSON.stringify(dataBaru) // Mengonversi objek JavaScript menjadi string JSON
+        });
+
+        if (!response.ok) {
+            throw new Error(`HTTP Error: ${response.status}`);
+        }
+
+        const hasilRespon = await response.json();
+        console.log('Data berhasil ditambahkan ke server:', hasilRespon);
+    } catch (error) {
+        console.error('Terjadi kesalahan saat mengirim data:', error);
+    }
+}
+
+// Panggil fungsi loadUsers saat aplikasi dimuat
+loadUsers();
 
 // ==========================================
 // PENGUJIAN LOGIKA & RENDER AWAL

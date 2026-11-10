@@ -41,12 +41,12 @@
             <div class="control-section" style="margin-top: 2rem;">
                 <h3>Pencarian & Filter Inventaris Alat</h3>
                 
-                <!-- Kotak Pencarian Berdasarkan Nama (Latihan 1) -->
+                <!-- Kotak Pencarian Berdasarkan Nama -->
                 <div class="search-container" style="margin-top: 1rem; margin-bottom: 1rem;">
                     <input type="text" id="cari-nama" placeholder="Cari nama alat..." class="form-control" style="width: 100%; padding: 0.5rem;">
                 </div>
 
-                <!-- Pilihan Jumlah Item per Halaman (Latihan 3) -->
+                <!-- Pilihan Jumlah Item per Halaman -->
                 <div class="limit-container" style="margin-top: 1rem; margin-bottom: 1rem; display: flex; align-items: center; gap: 0.5rem;">
                     <label for="limit-select">Tampilkan per halaman:</label>
                     <select id="limit-select" class="form-control" style="padding: 0.4rem;">
@@ -71,7 +71,25 @@
             </section>
         </section>
 
-        <!-- Section 3: Form Pendataan Alat dengan Validasi (Langkah Praktikum) -->
+        <!-- Section Tambahan: Data Pengguna Eksternal (Fetch API) dengan Input Pencarian & Tombol Retry -->
+        <section id="api-section" style="margin-top: 2rem;">
+            <h2>Daftar Pengguna Sistem (API)</h2>
+            <p id="api-message" style="font-weight: bold;"></p>
+            
+            <!-- Input Pencarian Khusus Data API (Latihan 2) -->
+            <div class="search-api-container" style="margin-top: 1rem; margin-bottom: 0.8rem;">
+                <input type="text" id="cari-api-user" placeholder="Cari nama pengguna API..." class="form-control" style="width: 100%; padding: 0.5rem;">
+            </div>
+
+            <!-- Tombol Retry yang disembunyikan secara default -->
+            <button id="btn-retry" class="btn" style="display: none; margin-bottom: 0.5rem;">Coba Lagi (Retry)</button>
+            
+            <ul id="api-output" style="margin-top: 0.5rem; padding-left: 1.2rem;">
+                <!-- Data API akan dimuat secara asinkron di sini -->
+            </ul>
+        </section>
+
+        <!-- Section 3: Form Pendataan Alat dengan Validasi -->
         <section id="kontak" style="margin-top: 2rem;">
             <h2>Form Pendataan Alat</h2>
             <p id="form-status" style="font-weight: bold;"></p>
@@ -84,7 +102,7 @@
                     <span id="error-nama" class="error" style="color: red; font-size: 0.85rem;"></span>
                 </div>
 
-                <!-- Kategori (Menggunakan Select sesuai instruksi) -->
+                <!-- Kategori -->
                 <div style="margin-bottom: 1rem;">
                     <label for="kategori">Kategori</label>
                     <select id="kategori" name="kategori" required class="form-control" style="width: 100%; padding: 0.4rem;">
@@ -95,14 +113,14 @@
                     <span id="error-kategori" class="error" style="color: red; font-size: 0.85rem;"></span>
                 </div>
 
-                <!-- Jumlah (Tipe Number dengan min dan required) -->
+                <!-- Jumlah -->
                 <div style="margin-bottom: 1rem;">
                     <label for="jumlah">Jumlah</label>
                     <input type="number" id="jumlah" name="jumlah" min="0" required class="form-control" style="width: 100%; padding: 0.4rem;">
                     <span id="error-jumlah" class="error" style="color: red; font-size: 0.85rem;"></span>
                 </div>
 
-                <!-- Kondisi (Opsi Pilihan) -->
+                <!-- Kondisi -->
                 <div style="margin-bottom: 1rem;">
                     <label for="kondisi">Kondisi</label>
                     <select id="kondisi" name="kondisi" required class="form-control" style="width: 100%; padding: 0.4rem;">
@@ -113,7 +131,7 @@
                     <span id="error-kondisi" class="error" style="color: red; font-size: 0.85rem;"></span>
                 </div>
 
-                <!-- Tanggal Perolehan (Tipe Date dengan required) -->
+                <!-- Tanggal Perolehan -->
                 <div style="margin-bottom: 1rem;">
                     <label for="tanggal">Tanggal Perolehan</label>
                     <input type="date" id="tanggal" name="tanggal" required class="form-control" style="width: 100%; padding: 0.4rem;">
